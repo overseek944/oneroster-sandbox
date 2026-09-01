@@ -1,0 +1,30 @@
+{
+  "name": "oneroster-sandbox",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A conformant OneRoster 1.1/1.2 provider serving realistic synthetic school district data, with deliberate fault injection for testing consumer resilience.",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "build": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.scripts.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "db:migrate:local": "wrangler d1 migrations apply oneroster-sandbox --local",
+    "db:migrate": "wrangler d1 migrations apply oneroster-sandbox --remote",
+    "seed:local": "tsx scripts/seed.ts --local",
+    "seed": "tsx scripts/seed.ts --remote",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "hono": "^4.6.14"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241218.0",
+    "@types/node": "^26.4.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8",
+    "wrangler": "^4.86.0"
+  }
+}

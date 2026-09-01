@@ -1,0 +1,18 @@
+name = "oneroster-sandbox"
+main = "src/index.ts"
+compatibility_date = "2026-08-01"
+compatibility_flags = ["nodejs_compat"]
+
+[observability]
+enabled = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "oneroster-sandbox"
+database_id = "56192ec2-ddbc-4377-96bd-2605b1ca57c8"
+migrations_dir = "migrations"
+
+# TOKEN_SIGNING_KEY and ADMIN_KEY are secrets, set with:
+#   wrangler secret put TOKEN_SIGNING_KEY
+#   wrangler secret put ADMIN_KEY
+# For local development they live in .dev.vars, which is gitignored.

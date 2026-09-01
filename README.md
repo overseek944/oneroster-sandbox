@@ -3,8 +3,8 @@
 A conformant **OneRoster 1.1 / 1.2 provider** that serves realistic synthetic
 school district data, and misbehaves on demand.
 
-Live: <https://oneroster-sandbox.pretonitech.workers.dev>
-Console: <https://oneroster-sandbox.pretonitech.workers.dev/console>
+Live: <https://oneroster-sandbox.pretoni.com>
+Console: <https://oneroster-sandbox.pretoni.com/console>
 
 ## Why this exists
 
@@ -66,7 +66,7 @@ where you can prove your sync does.
 Auth is OAuth 2.0 client credentials.
 
 ```bash
-BASE=https://oneroster-sandbox.pretonitech.workers.dev
+BASE=https://oneroster-sandbox.pretoni.com
 
 TOKEN=$(curl -s -X POST "$BASE/oauth/token" \
   -u "$CLIENT_ID:$CLIENT_SECRET" \
@@ -145,6 +145,21 @@ npm run deploy
 
 Secrets (`TOKEN_SIGNING_KEY`, `ADMIN_KEY`) live in `.dev.vars` locally and in
 `wrangler secret` in production. Neither is in the repository.
+
+## A note on the free tier
+
+These services run on Cloudflare's free plan, which caps D1 at **100,000 row
+writes per day**. One full roster sync of the demonstration district writes
+roughly 90,000 rows (29,115 staged, 29,115 sync records, and the operational
+tables), so a second full sync on the same day exhausts the quota and writes
+begin to fail with a clear D1 error.
+
+Reads are unaffected: the applied roster, the dashboards and the APIs keep
+working. It is a quota, not a defect, and the fix is either the $5/month Workers
+Paid plan or waiting for the reset at midnight UTC.
+
+Worth knowing before demonstrating this to anyone: run a full sync the day
+before, not five minutes before.
 
 ## Status and honest limits
 

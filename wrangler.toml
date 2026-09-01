@@ -16,3 +16,10 @@ migrations_dir = "migrations"
 #   wrangler secret put TOKEN_SIGNING_KEY
 #   wrangler secret put ADMIN_KEY
 # For local development they live in .dev.vars, which is gitignored.
+
+# A custom domain rather than workers.dev. Two reasons: a Worker calling
+# another Worker on a workers.dev subdomain loops back to itself and returns
+# 404, and a demo URL on the real domain is worth having.
+[[routes]]
+pattern = "oneroster-sandbox.pretoni.com"
+custom_domain = true
